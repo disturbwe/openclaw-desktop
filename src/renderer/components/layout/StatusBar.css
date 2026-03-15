@@ -1,0 +1,36 @@
+.status-bar {
+  height: 40px;
+  background: var(--bg-secondary);
+  border-top: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  font-size: 12px;
+  flex-shrink: 0;
+}
+
+.status-dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--green);
+  margin-right: 6px;
+}
+
+/* Ant Design overrides */
+.status-bar .ant-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  border: none;
+}
+
+.status-bar .ant-btn-text {
+  color: var(--text-secondary);
+}
+
+.status-bar .ant-btn-text:hover {
+  color: var(--text-primary);
+  background: var(--bg-tertiary);
+}

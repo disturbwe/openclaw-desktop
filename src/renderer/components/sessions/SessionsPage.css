@@ -1,0 +1,89 @@
+.sessions-page {
+  padding: 32px;
+  padding-bottom: 60px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.sessions-page.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+}
+
+.page-header {
+  margin-bottom: 24px;
+}
+
+.page-title {
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 8px;
+  background: linear-gradient(135deg, var(--text-primary), var(--accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.page-subtitle {
+  color: var(--text-secondary);
+  font-size: 15px;
+}
+
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.mono {
+  font-family: 'JetBrains Mono', 'SF Mono', monospace;
+  font-size: 13px;
+}
+
+.cost {
+  color: var(--green);
+}
+
+/* Ant Design overrides */
+.sessions-page .ant-card {
+  border-radius: 12px;
+  border-color: var(--border);
+}
+
+.sessions-page .ant-table {
+  background: transparent;
+}
+
+.sessions-page .ant-table-thead > tr > th {
+  background: var(--bg-tertiary);
+  border-bottom-color: var(--border);
+}
+
+.sessions-page .ant-table-tbody > tr > td {
+  border-bottom-color: var(--border);
+}
+
+.sessions-page .ant-table-tbody > tr:hover > td {
+  background: rgba(99, 102, 241, 0.05);
+}
+
+.sessions-page .ant-pagination {
+  margin-top: 16px;
+}
+
+@media (max-width: 768px) {
+  .sessions-page {
+    padding: 16px;
+  }
+
+  .toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}

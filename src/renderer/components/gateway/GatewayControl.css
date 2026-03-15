@@ -1,0 +1,9 @@
+.gateway-control {
+  display: inline-flex;
+  align-items: center;
+}
+
+.gateway-control-compact {
+  display: inline-flex;
+  align-items: center;
+}

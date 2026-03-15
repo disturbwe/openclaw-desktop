@@ -1,0 +1,152 @@
+.costs-page {
+  padding: 32px;
+  padding-bottom: 60px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.costs-page.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+}
+
+.page-header {
+  margin-bottom: 24px;
+}
+
+.page-title {
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 8px;
+  background: linear-gradient(135deg, var(--text-primary), var(--accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.page-subtitle {
+  color: var(--text-secondary);
+  font-size: 15px;
+}
+
+.metric-card {
+  border-radius: 12px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.metric-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+.model-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.model-bar-item {
+  padding: 12px 16px;
+  background: rgba(99, 102, 241, 0.03);
+  border-radius: 8px;
+}
+
+.model-bar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.model-cost {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 14px;
+  color: var(--green);
+}
+
+.model-bar-percent {
+  font-size: 12px;
+  color: var(--text-muted);
+  font-family: 'JetBrains Mono', monospace;
+  margin-top: 4px;
+}
+
+.timeline-chart {
+  display: flex;
+  align-items: flex-end;
+  gap: 12px;
+  height: 200px;
+  padding: 20px 0;
+}
+
+.timeline-bar {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  min-width: 40px;
+}
+
+.timeline-fill {
+  flex: 1;
+  width: 60%;
+  background: linear-gradient(180deg, var(--accent), var(--purple));
+  border-radius: 4px 4px 0 0;
+  min-height: 4px;
+}
+
+.timeline-label {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: 8px;
+}
+
+.timeline-value {
+  font-size: 11px;
+  color: var(--text-secondary);
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.expense-item {
+  padding: 12px 16px;
+  border-radius: 8px;
+  transition: background 0.2s;
+}
+
+.expense-item:hover {
+  background: rgba(99, 102, 241, 0.05);
+}
+
+.expense-cost {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 14px;
+  color: var(--green);
+}
+
+/* Ant Design overrides */
+.costs-page .ant-card {
+  border-radius: 12px;
+  border-color: var(--border);
+}
+
+.costs-page .ant-tabs-tab {
+  padding: 12px 16px;
+}
+
+@media (max-width: 768px) {
+  .costs-page {
+    padding: 16px;
+  }
+
+  .timeline-chart {
+    gap: 8px;
+  }
+
+  .timeline-bar {
+    min-width: 30px;
+  }
+}

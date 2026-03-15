@@ -1,0 +1,140 @@
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: linear-gradient(180deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
+  border-right: 1px solid var(--border);
+}
+
+.sidebar-header {
+  padding: 24px 24px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.03) 0%, rgba(118, 75, 162, 0.03) 100%);
+}
+
+.logo {
+  font-size: 28px;
+  filter: drop-shadow(0 0 12px rgba(102, 126, 234, 0.4));
+  flex-shrink: 0;
+  animation: pulse 3s ease-in-out infinite;
+}
+
+.brand {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  background: var(--accent-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.sidebar-footer {
+  padding: 16px 24px;
+  border-top: 1px solid var(--border);
+  margin-top: auto;
+  background: linear-gradient(0deg, rgba(102, 126, 234, 0.03) 0%, transparent 100%);
+}
+
+.gateway-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+.gateway-status.running {
+  color: var(--green);
+}
+
+.gateway-status.starting,
+.gateway-status.stopping {
+  color: var(--yellow);
+}
+
+.gateway-status.error {
+  color: var(--red);
+}
+
+.status-text {
+  font-weight: 600;
+}
+
+/* Ant Design Menu Overrides - Modern Style */
+.sidebar .ant-menu {
+  flex: 1;
+  border: none !important;
+  background: transparent !important;
+  color: var(--text-primary) !important;
+  padding: 12px 8px;
+}
+
+.sidebar .ant-menu-item {
+  margin: 4px 8px !important;
+  border-radius: 10px !important;
+  height: 44px !important;
+  line-height: 44px !important;
+  color: var(--text-secondary) !important;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid transparent;
+}
+
+.sidebar .ant-menu-item:hover {
+  background: linear-gradient(90deg, rgba(102, 126, 234, 0.08) 0%, rgba(118, 75, 162, 0.05) 100%) !important;
+  color: var(--text-primary) !important;
+  transform: translateX(4px);
+  border-color: rgba(102, 126, 234, 0.1);
+}
+
+.sidebar .ant-menu-item-selected {
+  background: var(--accent-gradient) !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+  border-color: transparent !important;
+}
+
+.sidebar .ant-menu-item-selected .ant-menu-item-icon,
+.sidebar .ant-menu-item-selected .anticon,
+.sidebar .ant-menu-item-selected span {
+  color: #ffffff !important;
+}
+
+.sidebar .ant-menu-item-icon,
+.sidebar .anticon {
+  font-size: 18px;
+  color: var(--text-secondary) !important;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.sidebar .ant-menu-item:hover .ant-menu-item-icon,
+.sidebar .ant-menu-item:hover .anticon {
+  color: var(--accent) !important;
+  transform: scale(1.1);
+}
+
+.sidebar .ant-menu-item-selected .ant-menu-item-icon,
+.sidebar .ant-menu-item-selected .anticon {
+  color: #ffffff !important;
+}
+
+/* Ant Design Menu Divider */
+.sidebar .ant-menu-item-divider {
+  background-color: var(--border) !important;
+  margin: 8px 16px !important;
+}
+
+/* Sidebar Glow Effect */
+.sidebar::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--accent-gradient);
+  opacity: 0.3;
+}

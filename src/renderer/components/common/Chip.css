@@ -1,0 +1,54 @@
+.chip {
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.chip:hover {
+  background: var(--bg-card);
+  color: var(--text-primary);
+  transform: translateY(-1px);
+}
+
+.chip.active {
+  background: linear-gradient(135deg, var(--accent), var(--purple));
+  color: white;
+  border-color: transparent;
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+}
+
+.badge {
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  display: inline-block;
+}
+
+.badge-main {
+  background: var(--accent);
+  color: #fff;
+}
+
+.badge-sub {
+  background: rgba(6, 182, 212, 0.2);
+  color: var(--cyan);
+}
+
+.badge-cron {
+  background: rgba(245, 158, 11, 0.2);
+  color: var(--yellow);
+}
+
+.badge-group {
+  background: rgba(59, 130, 246, 0.2);
+  color: var(--blue);
+}

@@ -1,0 +1,19 @@
+appId: com.openclaw.desktop
+productName: OpenClaw Desktop
+directories:
+  output: dist
+files:
+  - "src/**/*"
+  - "scripts/**/*"
+  - "assets/**/*"
+  - "package.json"
+win:
+  target: nsis
+  icon: assets/icon.ico
+nsis:
+  oneClick: false
+  allowToChangeInstallationDirectory: true
+  createDesktopShortcut: true
+  createStartMenuShortcut: true
+  installerIcon: assets/icon.ico
+  uninstallerIcon: assets/icon.ico

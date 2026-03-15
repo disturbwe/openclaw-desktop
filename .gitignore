@@ -1,0 +1,120 @@
+# Dependencies
+node_modules/
+openclaw-core/node_modules/
+
+# Submodule build artifacts
+openclaw-core/dist/
+openclaw-core/.pi/
+openclaw-core/Swabble/
+
+# Submodule GitHub/CI configs (not needed in main repo)
+openclaw-core/.github/
+openclaw-core/.git/
+
+# PNPM (submodule uses pnpm)
+pnpm-lock.yaml
+pnpm-debug.log*
+
+# Build outputs
+dist/
+out/
+release/
+
+# Vite
+.vite/
+
+# Electron build artifacts
+*.exe
+*.dmg
+*.AppImage
+*.deb
+*.rpm
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Runtime data
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# Directory for instrumented libs
+lib-cov/
+
+# Coverage directory
+coverage/
+*.lcov
+
+# nyc test coverage
+.nyc_output/
+
+# Temporary files
+tmp/
+temp/
+.cache/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Submodule IDE configs
+openclaw-core/.vscode/
+
+# Claude personal config
+.claude/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Environment files
+.env
+.env.local
+.env.*.local
+.env.example
+.env.prod
+.env.development
+
+# Testing
+test-results/
+
+# Screenshots (测试截图 - 仅根目录)
+screenshot_*.png
+screenshot_*.jpg
+screenshot_*.jpeg
+
+# Python (scripts)
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyc
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# TypeScript
+*.tsbuildinfo
