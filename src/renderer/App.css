@@ -25,7 +25,6 @@
 .app-content {
   flex: 1;
   overflow-y: auto;
-  padding-bottom: 40px;
 }
 
 .loading-placeholder {
