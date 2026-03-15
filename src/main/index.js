@@ -259,6 +259,14 @@ ipcMain.handle('window:screenshot', async () => {
   return null
 })
 
+// 导航
+ipcMain.handle('navigate', async (_event, path) => {
+  if (mainWindow && mainWindow.webContents) {
+    mainWindow.webContents.send('navigate', { path });
+  }
+  return null;
+});
+
 // 状态变化推送
 function setupStatusPush() {
   const gateway = require('./embedded-gateway');

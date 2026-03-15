@@ -138,3 +138,70 @@ export interface LogFile {
   size: number
   modified: Date
 }
+
+// Overview Page Types
+export interface OverviewMetrics {
+  totalSessions: number
+  runningSessions: number
+  todayTokens: {
+    input: number
+    output: number
+    total: number
+  }
+  todayCost: number
+  gatewayUptime: number
+  activeChannels: number
+}
+
+export interface RecentSession {
+  id: string
+  name: string
+  model: string
+  startTime: string
+  messageCount: number
+  cost: number
+  status: 'running' | 'completed' | 'aborted'
+}
+
+export interface CostSummary {
+  total: number
+  today: number
+  thisWeek: number
+  byModel: Record<string, number>
+  trend: Array<{ date: string; amount: number }>
+}
+
+// Window interface extension for openclaw API
+declare global {
+  interface Window {
+    openclaw: {
+      gateway: {
+        start: () => Promise<boolean>
+        stop: () => Promise<boolean>
+        restart: () => Promise<boolean>
+        status: () => Promise<string>
+        detailedStatus: () => Promise<GatewayStatus>
+        onStatusChange: (callback: (data: { status: GatewayStatus }) => void) => () => void
+        getConfig: () => Promise<Record<string, unknown> | null>
+        updateConfig: (config: Record<string, unknown>) => Promise<void>
+        getLogs: () => Promise<LogEntry[]>
+        getLogFiles: () => Promise<LogFile[]>
+        readLogFile: (filename: string) => Promise<string | null>
+      }
+      app: {
+        quit: () => void
+        minimize: () => void
+      }
+      onNavigate: (callback: (data: { path: string }) => void) => () => void
+      navigate: (path: string) => Promise<void>
+      platform: string
+      versions: {
+        node: string
+        chrome: string
+        electron: string
+      }
+    }
+  }
+}
+
+export {}

@@ -17,6 +17,7 @@ let sessDir, cronFile, dataDir, memoryDir, memoryMdPath, heartbeatPath, healthHi
 let skillsDir, configFiles, workspaceFilenames, claudeUsageFile, geminiUsageFile;
 let scrapeScript, geminiScrapeScript, pricingFile;
 let htmlPath;
+let activeConnections = {};
 
 function initPaths(options = {}) {
   PORT = options.port || 7000;
@@ -1202,6 +1203,127 @@ function getAvgResponseTime() {
   } catch { return 0; }
 }
 
+// Overview Metrics
+function getOverviewMetrics() {
+  try {
+    const sessions = getSessionsJson();
+    const todayData = getTodayTokens();
+    const costData = getCostData();
+
+    // Calculate running sessions (sessions started today)
+    const now = new Date();
+    const todayStr = now.toISOString().substring(0, 10);
+    const runningSessions = sessions.filter(s => s.startTime.startsWith(todayStr) && s.status === 'running').length;
+
+    // Calculate gateway uptime (time since server started)
+    const gatewayUptime = serverStartTime ? Date.now() - serverStartTime : 0;
+
+    // Count active channels (connected clients)
+    const activeChannels = Object.keys(activeConnections || {}).length;
+
+    return {
+      totalSessions: sessions.length,
+      runningSessions: runningSessions,
+      todayTokens: {
+        input: todayData.totalInput || 0,
+        output: todayData.totalOutput || 0,
+        total: (todayData.totalInput || 0) + (todayData.totalOutput || 0)
+      },
+      todayCost: costData.today || 0,
+      gatewayUptime: gatewayUptime,
+      activeChannels: activeChannels
+    };
+  } catch (e) {
+    console.error('Error getting overview metrics:', e);
+    return {
+      totalSessions: 0,
+      runningSessions: 0,
+      todayTokens: { input: 0, output: 0, total: 0 },
+      todayCost: 0,
+      gatewayUptime: 0,
+      activeChannels: 0
+    };
+  }
+}
+
+// Activities - get recent agent activities
+function getActivities(limit = 10) {
+  try {
+    const activities = [];
+    const sessions = getSessionsJson();
+
+    // Get recent sessions as activities
+    for (const session of sessions.slice(0, limit)) {
+      activities.push({
+        id: 'session-' + session.id,
+        type: 'main',
+        name: session.model || 'Agent Task',
+        snippet: session.snippet || 'Processing task...',
+        model: session.model,
+        timestamp: session.startTime,
+        running: session.status === 'running'
+      });
+    }
+
+    // Add cron jobs as activities
+    try {
+      if (fs.existsSync(cronFile)) {
+        const cronData = JSON.parse(fs.readFileSync(cronFile, 'utf8'));
+        const cronJobs = cronData.jobs || [];
+        for (const job of cronJobs.slice(0, 3)) {
+          activities.push({
+            id: 'cron-' + job.id,
+            type: 'cron',
+            name: job.name || 'Scheduled Task',
+            snippet: job.description || 'Running scheduled task...',
+            timestamp: job.lastRun || Date.now().toString(),
+            running: job.enabled
+          });
+        }
+      }
+    } catch {}
+
+    // Sort by timestamp and return
+    activities.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+    return activities.slice(0, limit);
+  } catch (e) {
+    console.error('Error getting activities:', e);
+    return [];
+  }
+}
+
+// Cost Summary
+function getCostSummary() {
+  try {
+    const costData = getCostData();
+
+    // Build trend data
+    const trend = Object.entries(costData.perDay || {}).map(([date, amount]) => ({
+      date,
+      amount: Math.round(amount * 10000) / 10000
+    })).slice(-14);
+
+    return {
+      total: costData.total || 0,
+      today: costData.today || 0,
+      thisWeek: costData.week || 0,
+      byModel: costData.perModel || {},
+      trend
+    };
+  } catch (e) {
+    console.error('Error getting cost summary:', e);
+    return {
+      total: 0,
+      today: 0,
+      thisWeek: 0,
+      byModel: {},
+      trend: []
+    };
+  }
+}
+
+let serverStartTime = null;
+
 function trackDiskHistory(diskPercent) {
   const histFile = path.join(dataDir, 'disk-history.json');
   let history = [];
@@ -1544,6 +1666,24 @@ const server = http.createServer((req, res) => {
     if (req.url === '/api/tokens-today') {
       res.writeHead(200, { 'Content-Type': 'application/json' });
       res.end(JSON.stringify(getTodayTokens()));
+      return;
+    }
+    if (req.url === '/api/overview/metrics') {
+      const metrics = getOverviewMetrics();
+      res.writeHead(200, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify(metrics));
+      return;
+    }
+    if (req.url === '/api/activities') {
+      const activities = getActivities();
+      res.writeHead(200, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ activities }));
+      return;
+    }
+    if (req.url === '/api/costs/summary') {
+      const summary = getCostSummary();
+      res.writeHead(200, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify(summary));
       return;
     }
     if (req.url === '/api/config') {
@@ -2255,6 +2395,7 @@ let serverInstance = null;
 
 function startServer(options = {}) {
   initPaths(options);
+  serverStartTime = Date.now();
 
   try { fs.mkdirSync(dataDir, { recursive: true }); } catch {}
 

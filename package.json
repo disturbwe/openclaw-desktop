@@ -4,7 +4,7 @@
   "description": "OpenClaw Desktop - Electron 桌面应用",
   "main": "src/main/index.js",
   "scripts": {
-    "start": "npm run build:renderer && electron .",
+    "start": "npm run dev",
     "dev": "cross-env NODE_ENV=development npm run dev:all",
     "dev:all": "concurrently \"vite\" \"wait-on http://localhost:5173 && npx electron . --enable-logging\"",
     "dev:vite": "vite",

@@ -1,1 +1,5 @@
 export { OverviewPage } from './OverviewPage'
+export { MetricCards } from './MetricCards'
+export { QuickActions } from './QuickActions'
+export { RecentSessions } from './RecentSessions'
+export { ActivityFeed } from './ActivityFeed'

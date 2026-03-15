@@ -1,0 +1,103 @@
+/* Quick Actions Styles */
+.quick-actions {
+  background: white;
+  border-radius: 12px;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  height: 100%;
+}
+
+.quick-actions .ant-card-head {
+  font-size: 15px;
+  font-weight: 600;
+  padding: 14px 16px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  background: linear-gradient(90deg, rgba(102, 126, 234, 0.02) 0%, rgba(118, 75, 162, 0.02) 100%);
+  color: #1f2937;
+}
+
+.quick-actions .ant-card-body {
+  padding: 16px;
+}
+
+.quick-actions-space {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.action-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.action-group:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.action-group-title {
+  font-size: 11px;
+  font-weight: 700;
+  color: #9ca3af;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.quick-actions .ant-btn {
+  border-radius: 8px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.quick-actions .ant-btn:hover {
+  transform: translateY(-1px);
+}
+
+.quick-actions .ant-btn:active {
+  transform: translateY(0);
+}
+
+.quick-actions .ant-btn-primary {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border: none;
+  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+}
+
+.quick-actions .ant-btn-primary:hover {
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+.quick-actions .ant-btn-dangerous {
+  box-shadow: 0 2px 6px rgba(255, 77, 79, 0.2);
+}
+
+.quick-actions .ant-btn-dangerous:hover {
+  box-shadow: 0 4px 10px rgba(255, 77, 79, 0.3);
+}
+
+/* Dark mode */
+[data-theme='dark'] .quick-actions {
+  background: #1a1a24;
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+[data-theme='dark'] .quick-actions .ant-card-head {
+  border-bottom-color: rgba(255, 255, 255, 0.08);
+  background: linear-gradient(90deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);
+  color: #f3f4f6;
+}
+
+[data-theme='dark'] .action-group {
+  border-bottom-color: rgba(255, 255, 255, 0.08);
+}
+
+[data-theme='dark'] .action-group-title {
+  color: #6b7280;
+}
+
+[data-theme='dark'] .quick-actions .ant-btn-primary {
+  background: linear-gradient(135deg, #818cf8 0%, #a78bfa 100%);
+}

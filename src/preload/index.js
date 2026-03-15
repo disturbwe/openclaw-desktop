@@ -41,6 +41,9 @@ contextBridge.exposeInMainWorld('openclaw', {
     return () => ipcRenderer.removeListener('navigate', handler);
   },
 
+  // 主动导航
+  navigate: (path) => ipcRenderer.invoke('navigate', path),
+
   // 平台信息
   platform: process.platform,
 

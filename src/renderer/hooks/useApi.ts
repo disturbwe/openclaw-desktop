@@ -1,6 +1,6 @@
 import { useCallback } from 'react'
 
-const API_BASE = 'http://localhost:7000'
+const API_BASE = '/api'
 
 interface FetchOptions {
   method?: 'GET' | 'POST' | 'PUT' | 'DELETE'
@@ -46,7 +46,7 @@ export function useSessionsApi() {
       tokensUsed: number
       cost: number
       snippet?: string
-    }> }>('/api/sessions')
+    }> }>('/sessions')
   }, [fetchData])
 
   return { getSessions }
@@ -62,7 +62,7 @@ export function useSystemApi() {
       disk: number
       temperature?: number
       uptime: number
-    }>('/api/system')
+    }>('/system')
   }, [fetchData])
 
   const getHealthHistory = useCallback(() => {
@@ -72,7 +72,7 @@ export function useSystemApi() {
       ram: number
       disk: number
       temperature?: number
-    }>>('/api/health-history')
+    }>>('/health-history')
   }, [fetchData])
 
   return { getSystemStats, getHealthHistory }
@@ -95,7 +95,7 @@ export function useUsageApi() {
         cost: number
         models: Record<string, { tokens: number; cost: number }>
       }
-    }>('/api/usage')
+    }>('/usage')
   }, [fetchData])
 
   const getCosts = useCallback(() => {
@@ -103,8 +103,59 @@ export function useUsageApi() {
       total: number
       byModel: Record<string, number>
       byDay: Array<{ date: string; amount: number }>
-    }>('/api/costs')
+    }>('/costs')
   }, [fetchData])
 
   return { getUsage, getCosts }
+}
+
+export function useOverviewApi() {
+  const { fetchData } = useApi()
+
+  const getOverviewMetrics = useCallback(() => {
+    return fetchData<{
+      totalSessions: number
+      runningSessions: number
+      todayTokens: { input: number; output: number; total: number }
+      todayCost: number
+      gatewayUptime: number
+      activeChannels: number
+    }>('/overview/metrics')
+  }, [fetchData])
+
+  const getRecentSessions = useCallback(() => {
+    return fetchData<{ sessions: Array<{
+      id: string
+      name: string
+      model: string
+      startTime: string
+      messageCount: number
+      cost: number
+      status: string
+    }> }>('/sessions?limit=5')
+  }, [fetchData])
+
+  const getActivities = useCallback(() => {
+    return fetchData<{ activities: Array<{
+      id: string
+      type: string
+      name: string
+      snippet?: string
+      model?: string
+      timestamp: string
+      running?: boolean
+    }> }>('/activities?limit=10')
+  }, [fetchData])
+
+  const getCostSummary = useCallback(() => {
+    return fetchData<{
+      total: number
+      today: number
+      thisWeek: number
+      byModel: Record<string, number>
+      trend: Array<{ date: string; amount: number }>
+    }>('/costs/summary')
+  }, [fetchData])
+
+  return { getOverviewMetrics, getRecentSessions, getActivities, getCostSummary }
 }

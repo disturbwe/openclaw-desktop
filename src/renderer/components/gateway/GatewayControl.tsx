@@ -92,7 +92,7 @@ export const GatewayControl: React.FC<GatewayControlProps> = ({ compact = false 
       icon: <ExclamationCircleOutlined />,
       content: 'Are you sure you want to restart the Gateway? This will temporarily disconnect all active sessions.',
       okText: 'Restart',
-      okType: 'warning',
+      okButtonProps: { danger: false },
       cancelText: 'Cancel',
       onOk: async () => {
         setLoading('restarting')

@@ -3,23 +3,6 @@ import { Spin, Result, Button } from 'antd'
 import { ReloadOutlined } from '@ant-design/icons'
 import './WebViewContainer.css'
 
-// Extend Window interface for openclaw API
-declare global {
-  interface Window {
-    openclaw: {
-      gateway: {
-        getConfig: () => Promise<{
-          gateway?: {
-            auth?: {
-              token?: string
-            }
-          }
-        } | null>
-      }
-    }
-  }
-}
-
 // control-ui is served from the main process dashboard server
 const CONTROL_UI_BASE_URL = 'http://localhost:7000/control-ui'
 const GATEWAY_WS_URL = 'ws://localhost:18789'
@@ -41,7 +24,7 @@ interface WebViewContainerProps {
 async function getGatewayToken(): Promise<string | null> {
   try {
     const config = await window.openclaw.gateway.getConfig()
-    return config?.gateway?.auth?.token || null
+    return (config as any)?.gateway?.auth?.token || null
   } catch {
     return null
   }

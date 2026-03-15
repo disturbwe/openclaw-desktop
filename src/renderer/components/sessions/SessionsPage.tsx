@@ -20,7 +20,10 @@ export const SessionsPage: React.FC = () => {
     const fetchSessions = async () => {
       try {
         const res = await getSessions()
-        setSessions(res.sessions || [])
+        setSessions((res.sessions || []).map(s => ({
+          ...s,
+          status: s.status as 'running' | 'completed' | 'aborted'
+        })))
       } catch (err) {
         console.error('Failed to fetch sessions:', err)
       } finally {

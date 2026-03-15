@@ -14,6 +14,12 @@ export default defineConfig({
     hmr: {
       port: 5173,
       host: 'localhost'
+    },
+    proxy: {
+      '/api': {
+        target: 'http://localhost:7000',
+        changeOrigin: true
+      }
     }
   },
   plugins: [react()],

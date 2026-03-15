@@ -33,11 +33,21 @@ export const CostsPage: React.FC = () => {
     const fetchData = async () => {
       try {
         const [costsRes, sessionsRes] = await Promise.all([
-          getCosts() as Promise<ApiCostData>,
+          getCosts(),
           getSessions(),
         ])
-        setCostData(costsRes)
-        setSessions(sessionsRes.sessions || [])
+        // 适配 API 返回数据格式
+        setCostData({
+          total: costsRes.total || 0,
+          today: (costsRes as any).today,
+          week: (costsRes as any).week,
+          perModel: (costsRes as any).perModel || costsRes.byModel || {},
+          perDay: (costsRes as any).perDay || {},
+        })
+        setSessions((sessionsRes.sessions || []).map(s => ({
+          ...s,
+          status: s.status as 'running' | 'completed' | 'aborted'
+        })))
       } catch (err) {
         console.error('Failed to fetch cost data:', err)
       } finally {

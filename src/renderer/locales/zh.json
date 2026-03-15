@@ -33,7 +33,54 @@
     "messages": "消息数",
     "systemResources": "系统资源",
     "recentActivity": "近期活动",
-    "noActivity": "暂无近期活动"
+    "noActivity": "暂无近期活动",
+    "metrics": {
+      "totalSessions": "总会话",
+      "runningSessions": "运行中",
+      "todayTokens": "今日 Token",
+      "todayCost": "今日成本",
+      "uptime": "运行时长",
+      "activeChannels": "活动频道",
+      "channels": "频道",
+      "input": "输入",
+      "output": "输出",
+      "noActiveSessions": "当前无活跃会话"
+    },
+    "recentSessions": {
+      "title": "最近会话",
+      "subtitle": "个会话",
+      "status": "状态",
+      "name": "会话",
+      "started": "开始时间",
+      "duration": "时长",
+      "messages": "消息",
+      "cost": "成本",
+      "noSessions": "暂无会话"
+    },
+    "activityFeed": {
+      "title": "实时活动",
+      "subtitle": "条活动",
+      "noActivities": "暂无活动"
+    },
+    "quickActions": {
+      "title": "快速操作",
+      "gateway": "Gateway 控制",
+      "gatewayRunning": "运行中",
+      "gatewayStarting": "启动中...",
+      "startGateway": "启动 Gateway",
+      "gatewayStopped": "已停止",
+      "gatewayStopping": "停止中...",
+      "stopGateway": "停止 Gateway",
+      "restartGateway": "重启 Gateway",
+      "shortcuts": "快捷入口",
+      "newSession": "新建会话",
+      "sessions": "会话列表",
+      "logs": "查看日志",
+      "config": "打开配置",
+      "skills": "技能管理"
+    },
+    "newSessionComingSoon": "新建会话功能开发中...",
+    "viewSession": "查看会话"
   },
   "sessions": {
     "title": "会话",
@@ -87,11 +134,31 @@
   "common": {
     "loading": "加载中...",
     "comingSoon": "即将推出...",
-    "underConstruction": "建设中"
+    "underConstruction": "建设中",
+    "running": "运行中",
+    "start": "启动",
+    "stop": "停止",
+    "restart": "重启",
+    "warning": "告警",
+    "loadMore": "加载更多"
   },
   "gateway": {
     "running": "运行中",
-    "stopped": "已停止"
+    "stopped": "已停止",
+    "startSuccess": "Gateway 启动成功",
+    "startFailed": "Gateway 启动失败",
+    "stopSuccess": "Gateway 已停止",
+    "stopFailed": "Gateway 停止失败",
+    "restartSuccess": "Gateway 已重启",
+    "restartFailed": "Gateway 重启失败"
+  },
+  "activity": {
+    "type": {
+      "main": "主任务",
+      "sub": "子任务",
+      "cron": "定时任务",
+      "group": "组任务"
+    }
   },
   "logs": {
     "title": "日志",
